@@ -16,9 +16,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Publisher[0].PublisherName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Publisher[0].Books)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -27,9 +24,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(model => item.PublisherName)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Books)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

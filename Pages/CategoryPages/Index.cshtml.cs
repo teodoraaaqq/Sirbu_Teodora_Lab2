@@ -15,9 +15,22 @@ public class IndexModel : PageModel
     }
 
     public IList<Category> Category { get; set; } = default!;
+    public int CategoryID { get; set; }
+    public IList<Book> Books { get; set; } = new List<Book>();
 
-    public async Task OnGetAsync()
+
+    public async Task OnGetAsync(int? id)
     {
         Category = await _context.Category.ToListAsync();
+        if (id != null)
+        {
+            CategoryID = id.Value;
+
+            Books = await _context.Book
+                .Include(b => b.Authors)
+                .Include(b => b.BookCategories)
+                .Where(b => b.BookCategories.Any(c => c.CategoryID == id.Value))
+                .ToListAsync();
+        }
     }
 }

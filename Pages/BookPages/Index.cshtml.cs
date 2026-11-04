@@ -54,13 +54,16 @@ public class IndexModel : PageModel
                 .Where(b => b.AuthorsID == AuthorId.Value)
                 .ToList();
         }
-
         if (!String.IsNullOrEmpty(searchString))
         {
-            BookD.Books = BookD.Books.Where(s => s.Authors.FirstName.Contains(searchString) || s.Authors.LastName.Contains(searchString) || s.Title.Contains(searchString));
+            BookD.Books = BookD.Books.Where(s =>
+                s.Title.Contains(searchString) ||
+                s.Authors.FirstName.Contains(searchString) ||
+                s.Authors.LastName.Contains(searchString) ||
+                (s.Authors.FirstName + " " + s.Authors.LastName).Contains(searchString));
         }
 
-            if (id != null)
+        if (id != null)
         {
             BookID = id.Value;
             Book book = BookD.Books

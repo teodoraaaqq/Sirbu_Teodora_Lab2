@@ -1,11 +1,18 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Sirbu_Teodora_Lab2.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Sirbu_Teodora_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Sirbu_Teodora_Lab2Context' not found.");
 
 builder.Services.AddDbContext<Sirbu_Teodora_Lab2Context>(options => options.UseSqlServer(connectionString));
 
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LibraryIdentityContext>();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<LibraryIdentityContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("Sirbu_Teodora_Lab2Context") ?? throw new InvalidOperationException("Connectionstring 'Nume_Pren_Lab2Context' not found.")));
 
 var app = builder.Build();
 

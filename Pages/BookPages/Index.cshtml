@@ -34,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.Book[0].Title)
                 </a>
             </th>
-            <th colspan="2">
+            <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.AuthorSort">
                 @Html.DisplayNameFor(model => model.Book[0].Authors)
                 </a>
@@ -50,7 +50,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].BookCategories)
-            </th
+            </th>
             <th></th>
         </tr>
     </thead>
